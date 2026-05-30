@@ -1,9 +1,24 @@
 import { Routes } from '@angular/router';
 import { Home } from './components/home/home';
+import { Header } from './common/layout/header/header';
+import { Sidebar } from './common/layout/sidebar/sidebar';
 
 export const routes: Routes = [
     {
-        "path": "home",
-        "component": Home
+        path: '',
+        pathMatch: 'full',
+        redirectTo: 'home'
+    },
+    {
+        path: 'home',
+        component: Home
+    },
+    {
+        path: 'header',
+        component: Header
+    },
+    {
+        path: 'sidebar',
+        component: Sidebar
     }
 ];

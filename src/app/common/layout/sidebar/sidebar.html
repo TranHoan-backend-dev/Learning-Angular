@@ -1,0 +1,50 @@
+<div class="drawer-container">
+    <dx-drawer
+        [opened]="isDrawerOpened"
+        [minSize]="60"
+        [maxSize]="240"
+        position="left"
+        revealMode="slide"
+        openedStateMode="shrink"
+        template="menu"
+    >
+
+        <!-- Định nghĩa nội dung của sidebar -->
+        <div
+            class="sidebar-menu-wrapper"
+            *dxTemplate="let data of 'menu'"
+        >
+            <div class="brand-section">
+                <span class="dx-icon dx-icon-box brand-icon"></span>
+                <span
+                    class="brand-title"
+                    *ngIf="isDrawerOpened"
+                >DevApp</span>
+            </div>
+
+            <dx-list
+                [items]="navigationItems"
+                [activeStateEnabled]="true"
+                [hoverStateEnabled]="true"
+                [focusStateEnabled]="true"
+                selectionMode="single"
+                (onItemClick)="onNavigationClick($event)"
+            >
+                <div
+                    class="menu-item-row"
+                    *dxTemplate="let item of 'item'"
+                >
+                    <span class="dx-icon dx-icon-{{item.icon}} item-icon"></span>
+                    <span
+                        class="item-text"
+                        *ngIf="isDrawerOpened"
+                    >{{item.text}}</span>
+                </div>
+            </dx-list>
+        </div>
+
+        <div class="main-content-area">
+            <router-outlet></router-outlet>
+        </div>
+    </dx-drawer>
+</div>

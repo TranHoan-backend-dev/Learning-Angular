@@ -1,0 +1,76 @@
+dx-drawer {
+    height: 100%;
+    width: 100%;
+}
+
+.drawer-container {
+    height: 100vh;
+    width: 100%;
+}
+
+.sidebar-menu-wrapper {
+    width: 240px;
+    height: 100%;
+    background-color: #1e293b;
+    color: #94a3b8;
+    display: flex;
+    flex-direction: column;
+
+    .brand-section {
+        padding: 1.5rem 1rem;
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+        color: white;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+
+        .brand-icon {
+            font-size: 1.5rem;
+            color: #3b82f6;
+        }
+
+        .brand-title {
+            font-weight: bold;
+            font-size: 1.1rem;
+        }
+    }
+}
+
+// custom dx-list hiển thị dạng menu
+::ng-deep {
+    .dx-list {
+        background: transparent;
+        border: none;
+
+        .dx-list-item {
+            color: #94a3b8;
+            border: none;
+            background: transparent;
+
+            &:hover {
+                background-color: rgba(255, 255, 255, 0.05);
+                color: white;
+            }
+
+            &.dx-list-item-selected {
+                background-color: rgba(59, 130, 246, 0.15);
+                color: #3b82f6;
+            }
+        }
+    }
+}
+
+.menu-item-row {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.25rem 0;
+    color: white;
+}
+
+.main-content-area {
+    padding: 20px;
+    background-color: #f8fafc;
+    height: 100%;
+    overflow-y: auto;
+}

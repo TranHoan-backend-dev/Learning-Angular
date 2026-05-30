@@ -1,1 +1,160 @@
-<p>home works!</p>
+<div class="demo-container">
+  <header class="demo-header">
+    <div class="logo-area">
+      <span class="dx-badge">DevExtreme 25.2</span>
+      <h1>DevExtreme Angular Dashboard Test</h1>
+    </div>
+    <p class="subtitle">Trang kiểm thử thư viện UI DevExtreme trong dự án Angular của bạn</p>
+  </header>
+
+  <!-- Section 1: Quick Actions & Notification Tests -->
+  <section class="demo-section card">
+    <h2 class="section-title"><i class="dx-icon-info dx-icon"></i> 1. Kiểm tra Button & Notification</h2>
+    <p class="section-desc">Click vào các nút dưới đây để kiểm tra tương tác và thông báo Toast của DevExtreme (devextreme/ui/notify).</p>
+    <div class="button-group">
+      <dx-button
+        text="Thông tin (Info)"
+        type="default"
+        icon="info"
+        (onClick)="onTestButtonClick('info', 'Đây là thông tin từ hệ thống!')">
+      </dx-button>
+
+      <dx-button
+        text="Thành công (Success)"
+        type="success"
+        icon="check"
+        (onClick)="onTestButtonClick('success', 'Thao tác đã hoàn thành xuất sắc!')">
+      </dx-button>
+
+      <dx-button
+        text="Cảnh báo (Warning)"
+        type="normal"
+        icon="warning"
+        (onClick)="onTestButtonClick('warning', 'Hệ thống phát hiện cảnh báo nhẹ!')">
+      </dx-button>
+
+      <dx-button
+        text="Lỗi (Error)"
+        type="danger"
+        icon="remove"
+        (onClick)="onTestButtonClick('error', 'Có lỗi xảy ra, vui lòng thử lại!')">
+      </dx-button>
+    </div>
+  </section>
+
+  <!-- Section 2: Form & Filter Controls -->
+  <section class="demo-section card">
+    <h2 class="section-title"><i class="dx-icon-filter dx-icon"></i> 2. Bộ lọc & Cấu hình Grid (Form Controls)</h2>
+    <p class="section-desc">Tương tác với các control dưới đây để lọc dữ liệu trực tiếp trong DataGrid.</p>
+    <div class="filters-grid">
+      <div class="filter-item">
+        <label>Tìm theo tên:</label>
+        <dx-text-box 
+          [(value)]="searchName" 
+          placeholder="Nhập tên để tìm kiếm..." 
+          valueChangeEvent="keyup"
+          [showClearButton]="true">
+        </dx-text-box>
+      </div>
+
+      <div class="filter-item">
+        <label>Lọc chức vụ (Position):</label>
+        <dx-select-box 
+          [items]="positions" 
+          [(value)]="selectedPosition">
+        </dx-select-box>
+      </div>
+
+      <div class="filter-item checkbox-container">
+        <dx-check-box 
+          [(value)]="showSalaryColumn" 
+          text="Hiển thị cột Lương (Salary)">
+        </dx-check-box>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 3: Data Grid Test -->
+  <section class="demo-section card grid-section">
+    <h2 class="section-title"><i class="dx-icon-card dx-icon"></i> 3. DxDataGrid (Bảng dữ liệu tương tác)</h2>
+    <p class="section-desc">Bảng hỗ trợ thêm, sửa, xóa, tìm kiếm, sắp xếp và phân trang.</p>
+    
+    <dx-data-grid
+      id="gridContainer"
+      [dataSource]="filteredEmployees"
+      [keyExpr]="'ID'"
+      [showBorders]="true"
+      [allowColumnReordering]="true"
+      [allowColumnResizing]="true"
+      [columnAutoWidth]="true"
+      (onRowInserted)="onRowInserted($event)"
+      (onRowUpdated)="onRowUpdated($event)"
+      (onRowRemoved)="onRowRemoved($event)">
+      
+      <!-- Cấu hình phân trang -->
+      <dxo-paging [pageSize]="5"></dxo-paging>
+      <dxo-pager
+        [showPageSizeSelector]="true"
+        [allowedPageSizes]="[5, 10, 20]"
+        [showInfo]="true">
+      </dxo-pager>
+
+      <!-- Hỗ trợ tìm kiếm & lọc trên grid -->
+      <dxo-search-panel [visible]="true" placeholder="Tìm kiếm nhanh trong Grid..."></dxo-search-panel>
+      <dxo-header-filter [visible]="true"></dxo-header-filter>
+
+      <!-- Cho phép chỉnh sửa (Editing) -->
+      <dxo-editing
+        mode="popup"
+        [allowUpdating]="true"
+        [allowAdding]="true"
+        [allowDeleting]="true">
+        <dxo-popup title="Thông tin nhân viên" [showTitle]="true" [width]="700" [height]="525"></dxo-popup>
+      </dxo-editing>
+
+      <!-- Khai báo các cột -->
+      <dxi-column dataField="ID" [allowEditing]="false" alignment="center" width="60"></dxi-column>
+      <dxi-column dataField="FirstName" caption="Tên (First Name)" [validationRules]="[{ type: 'required', message: 'Tên không được để trống' }]"></dxi-column>
+      <dxi-column dataField="LastName" caption="Họ (Last Name)" [validationRules]="[{ type: 'required', message: 'Họ không được để trống' }]"></dxi-column>
+      <dxi-column dataField="Position" caption="Chức vụ"></dxi-column>
+      <dxi-column dataField="BirthDate" caption="Ngày sinh" dataType="date" format="yyyy-MM-dd"></dxi-column>
+      <dxi-column dataField="HireDate" caption="Ngày vào làm" dataType="date" format="yyyy-MM-dd"></dxi-column>
+      
+      <!-- Cột hiển thị động qua checkbox -->
+      <dxi-column 
+        dataField="Salary" 
+        caption="Mức lương" 
+        dataType="number" 
+        format="currency" 
+        [visible]="showSalaryColumn">
+      </dxi-column>
+      
+      <dxi-column dataField="Address" caption="Địa chỉ" [visible]="false"></dxi-column>
+    </dx-data-grid>
+  </section>
+
+  <!-- Section 4: Chart Visualization -->
+  <section class="demo-section card chart-section">
+    <h2 class="section-title"><i class="dx-icon-chart dx-icon"></i> 4. DxChart (Biểu đồ thống kê)</h2>
+    <p class="section-desc">Thống kê số lượng nhân sự theo từng chức vụ (dữ liệu được tính toán động từ danh sách nhân viên).</p>
+    
+    <dx-chart
+      id="chart"
+      [dataSource]="positionDistribution"
+      title="Phân bố nhân sự theo vị trí công việc">
+      <dxo-common-series-settings
+        argumentField="position"
+        type="bar"
+        hoverMode="allArgumentPoints"
+        selectionMode="allArgumentPoints">
+      </dxo-common-series-settings>
+      <dxi-series
+        valueField="count"
+        name="Số lượng nhân viên"
+        color="#3498db">
+      </dxi-series>
+      <dxo-legend verticalAlignment="bottom" horizontalAlignment="center"></dxo-legend>
+      <dxo-tooltip [enabled]="true"></dxo-tooltip>
+    </dx-chart>
+  </section>
+</div>
