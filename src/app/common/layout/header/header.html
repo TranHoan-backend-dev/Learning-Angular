@@ -1,0 +1,32 @@
+<div class="header-container">
+    <dx-toolbar>
+        <!-- Toolbar bên trái -->
+        <!-- widget dxButton khai báo 1 button bên trong -->
+        @for (item of leftMenus; track $index) {
+        <dxi-item
+            location="before"
+            widget="dxButton"
+            [options]="{
+                    icon: item.icon,
+                    stylingMode: item.stylingMode,
+                    onClick: item.onClick,
+                    elementAttr: {class: item.class}
+                }"
+        >
+        </dxi-item>
+        }
+        @for (item of rightMenus; track $index) {
+        <dxi-item
+            location="after"
+            widget="dxButton"
+            [options]="{
+                    icon: item.icon,
+                    stylingMode: item.stylingMode,
+                    onClick: item.onClick,
+                    elementAttr: {class: item.class}
+                }"
+        >
+        </dxi-item>
+        }
+    </dx-toolbar>
+</div>

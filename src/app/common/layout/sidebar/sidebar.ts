@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
-import { Router, RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
+import { Router, RouterOutlet } from '@angular/router';
 import { DxDrawerModule, DxListModule, DxTemplateModule } from 'devextreme-angular';
 
 interface NavigationItem {
@@ -15,8 +15,6 @@ interface NavigationItem {
   standalone: true,
   imports: [
     CommonModule,
-    RouterLink,
-    RouterLinkActive,
     RouterOutlet,
     DxDrawerModule,
     DxListModule,

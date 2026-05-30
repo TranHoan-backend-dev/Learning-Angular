@@ -1,68 +1,79 @@
 dx-drawer {
-    height: 100%;
-    width: 100%;
+    height: 100%; // bao phủ toàn bộ chiều cao
+    width: 100%; // bao phủ toàn bộ chiều rộng
 }
 
 .drawer-container {
-    height: 100vh;
+    height: 100vh; // đảm bảo chiếm trọn chiều cao màn hình thiết bị
     width: 100%;
 }
 
 .sidebar-menu-wrapper {
-    width: 240px;
+    width: 240px; // cố định chiều rộng khung chứa menu thực tế
     height: 100%;
     background-color: #1e293b;
     color: #94a3b8;
-    display: flex;
+    display: flex; // xếp chồng các phần tử con theo chiều dọc
     flex-direction: column;
 
+    // style phần logo
     .brand-section {
-        padding: 1.5rem 1rem;
+        padding: 1.5rem 1rem; // trên dưới 1.5rem (24px), trái phải 1rem (16px)
         display: flex;
-        align-items: center;
-        gap: 0.75rem;
+        align-items: center; // căn giữa theo cross axis. Vì flex direction là column nên cross axis là dọc, main axis là ngang
+        gap: 0.75rem; // tạo khoảng cách giữa các phần tử con 12px (brand-icon, brand-title)
         color: white;
         border-bottom: 1px solid rgba(255, 255, 255, 0.05);
 
         .brand-icon {
-            font-size: 1.5rem;
+            font-size: 1.5rem; // cỡ chữ 24px
             color: #3b82f6;
         }
 
         .brand-title {
             font-weight: bold;
-            font-size: 1.1rem;
+            font-size: 1.1rem; // cỡ chữ 17.6px
         }
     }
 }
 
 // custom dx-list hiển thị dạng menu
+// ::ng-deep phá vỡ view encapsulation, cho phép css hiện tại tác động xuống component con
+// nếu không dùng ::ng-deep thì style custom không áp dụng được
 ::ng-deep {
     .dx-list {
-        background: transparent;
+        background: transparent; // nền trong suốt
         border: none;
 
+        // các thẻ HTML con do dx-list sinh ra khi duyệt [items]
+        // class này được gán vào HTML con đó
         .dx-list-item {
             color: #94a3b8;
             border: none;
-            background: transparent;
+            background: transparent; // nền trong suốt
 
+            // &: selector cha. Cụ thể là dx-list-item
             &:hover {
                 background-color: rgba(255, 255, 255, 0.05);
                 color: white;
             }
 
+            // vì bật selectionMode=single nên class này được tự động
+            // thêm vào các thẻ HTML con khi được click, 
+            // dùng để quản lý trạng thái kích hoạt active hay selected
             &.dx-list-item-selected {
-                background-color: rgba(59, 130, 246, 0.15);
-                color: #3b82f6;
+                background-color: rgba(59, 130, 246, 0.15); // red 59, green 130, blue 246, alpha (độ trong suốt) 0.15 => màu xanh rất nhạt
             }
         }
     }
 }
 
+// style cho template
 .menu-item-row {
     display: flex;
-    align-items: center;
+    // không có flex-column nên mặc định là row
+    // => cross axis dọc
+    align-items: center; // căn giữa theo chiều dọc
     gap: 0.75rem;
     padding: 0.25rem 0;
     color: white;
