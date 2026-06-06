@@ -24,14 +24,14 @@ interface NavigationItem {
   styleUrl: './sidebar.scss'
 })
 export class Sidebar {
-  isDrawerOpened = true;
+  isDrawerOpened = false;
 
   navigationItems: NavigationItem[] = [
     { id: 1, text: 'Trang chủ', path: '/home', icon: 'home' },
     { id: 2, text: 'Cấu hình', path: '/test', icon: 'preferences' }
   ];
 
-  constructor(private router: Router) {}
+  constructor(private router: Router) { }
 
   onNavigationClick(e: any) {
     const clickedItem = e.itemData as NavigationItem;

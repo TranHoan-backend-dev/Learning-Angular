@@ -1,11 +1,14 @@
 <div class="drawer-container">
     <!-- Widget dùng để xây dựng sidebar hoặc bảng điều khiển -->
+    <!-- opened: Quản lý trạng thái đóng/mở -->
+    <!-- revealMode: cách xuất hiện (slide: trượt ra, expand: mở rộng hoặc thu hẹp nhưng giữ nguyên mép trái)-->
+    <!-- openedStateMode: Khi drawer mở, content bị co lại -->
     <dx-drawer
         [opened]="isDrawerOpened"
         [minSize]="60"
         [maxSize]="240"
         position="left"
-        revealMode="slide"
+        revealMode="expand"
         openedStateMode="shrink"
         template="menu"
     >
@@ -13,6 +16,7 @@
         <!-- Định nghĩa nội dung của sidebar -->
         <div
             class="sidebar-menu-wrapper"
+            [class.collapsed]="!isDrawerOpened"
             *dxTemplate="let data of 'menu'"
         >
             <div class="brand-section">

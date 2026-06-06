@@ -1,5 +1,166 @@
+<!-- 
+=== OLD CODE (TRƯỚC KHI UPDATE THEO MOCKUP) ===
 <div class="menu-component">
-    <dx-drawer>
+    <dx-button (onClick)="handleCloseDrawer()">
+        Click me
+    </dx-button>
+    <dx-drawer
+        *ngIf="isDrawerOpen"
+        [opened]="true"
+        [minSize]="0"
+        [maxSize]="240"
+        position="left"
+        revealMode="expand"
+        template="panelTemplate"
+    >
+        <div
+            *dxTemplate="let data of 'panelTemplate'"
+            class="action-section"
+        >
+            <dx-button
+                class="close-btn"
+                (onClick)="handleCloseDrawer()"
+            >
+                X
+            </dx-button>
 
+            <div class="action-btn">
+                action-btn
+            </div>
+        </div>
+
+        <div class="main-content">
+            <div class="grid-layout">
+                @for (item of [1,2,3]; track $index) {
+                <div class="grid-item">
+                    item-{{item}}
+                </div>
+                }
+            </div>
+        </div>
+    </dx-drawer>
+</div>
+==============================================
+-->
+
+<div class="menu-component">
+    <dx-button
+        *ngIf="!isDrawerOpen"
+        class="floating-trigger-btn"
+        icon="menu"
+        (onClick)="handleCloseDrawer()"
+    >
+    </dx-button>
+
+    <dx-drawer
+        *ngIf="isDrawerOpen"
+        [opened]="true"
+        [minSize]="0"
+        [maxSize]="240"
+        position="left"
+        revealMode="expand"
+        template="panelTemplate"
+    >
+        <!-- Panel bên trái (chứa nút đóng và các nút tác vụ dưới đáy) -->
+        <div
+            *dxTemplate="let data of 'panelTemplate'"
+            class="action-section"
+        >
+            <!-- Nút đóng (X tròn đỏ theo mockup) -->
+            <button
+                class="mockup-close-btn"
+                (click)="handleCloseDrawer()"
+            >
+                ✕
+            </button>
+
+            <!-- Nhóm nút tác vụ dưới đáy (Home, Settings) -->
+            <div class="bottom-actions">
+                <button class="action-icon-btn">
+                    <span class="dx-icon dx-icon-home"></span>
+                </button>
+                <button class="action-icon-btn">
+                    <span class="dx-icon dx-icon-preferences"></span>
+                </button>
+            </div>
+        </div>
+
+        <!-- Nội dung chính bên phải -->
+        <dx-scroll-view
+            class="main-content"
+            width="100%"
+            height="100%"
+            direction="vertical"
+        >
+            <div class="main-content-container">
+                <!-- Thanh tìm kiếm (Pill-shape mockup) -->
+                <div class="search-container">
+                    <span class="dx-icon dx-icon-find search-icon"></span>
+                    <input
+                        type="text"
+                        placeholder="Tìm kiếm..."
+                        class="mockup-search-input"
+                    />
+                </div>
+
+                <!-- Section: Gần đây -->
+                <div class="section-container">
+                    <div class="section-header">
+                        <span class="section-title">Gần đây</span>
+                        <a
+                            href="javascript:void(0)"
+                            class="market-link"
+                        >
+                            Chợ ứng dụng <span>❯</span>
+                        </a>
+                    </div>
+
+                    <div class="recent-grid">
+                        @for (app of recentApps; track app.name) {
+                        <div class="recent-card">
+                            <div
+                                class="app-icon-wrapper"
+                                [style.background-color]="app.iconBg"
+                            >
+                                <span class="dx-icon dx-icon-{{app.icon}} app-icon"></span>
+                                <span
+                                    *ngIf="app.badge"
+                                    class="badge-count"
+                                >{{app.badge}}</span>
+                            </div>
+                            <span class="app-name">{{app.name}}</span>
+                        </div>
+                        }
+                    </div>
+                </div>
+
+                <!-- Categories -->
+                @for (cat of categories; track cat.title) {
+                <div class="section-container">
+                    <div class="section-header">
+                        <span class="section-title">{{cat.title}}</span>
+                    </div>
+
+                    <div class="category-grid">
+                        @for (item of cat.items; track item.name) {
+                        <div class="category-item-row">
+                            <div
+                                class="app-icon-wrapper-small"
+                                [style.background-color]="item.iconBg"
+                            >
+                                <span class="dx-icon dx-icon-{{item.icon}} app-icon-small"></span>
+                                <span
+                                    *ngIf="item.badge"
+                                    class="badge-count-small"
+                                >{{item.badge}}</span>
+                            </div>
+                            <span class="category-item-name">{{item.name}}</span>
+                        </div>
+                        }
+                    </div>
+                </div>
+                }
+            </div>
+        </dx-scroll-view>
     </dx-drawer>
 </div>

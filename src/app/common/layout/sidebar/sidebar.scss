@@ -15,6 +15,31 @@ dx-drawer {
     color: #94a3b8;
     display: flex; // xếp chồng các phần tử con theo chiều dọc
     flex-direction: column;
+    transition: width 0.3s ease;
+
+    &.collapsed {
+        width: 60px;
+
+        .brand-section {
+            padding: 1.5rem 0; // trên dưới 24px, trái phải 0px
+            justify-content: center; // căn theo chiều ngang (cross axis)
+            gap: 0;
+        }
+
+        ::ng-deep {
+            .dx-list-item-content {
+                padding: 0 !important;
+                display: flex;
+                justify-content: center;
+            }
+        }
+
+        .menu-item-row {
+            justify-content: center;
+            gap: 0;
+            width: 100%;
+        }
+    }
 
     // style phần logo
     .brand-section {
@@ -24,6 +49,7 @@ dx-drawer {
         gap: 0.75rem; // tạo khoảng cách giữa các phần tử con 12px (brand-icon, brand-title)
         color: white;
         border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        transition: padding 0.3s ease, justify-content 0.3s ease;
 
         .brand-icon {
             font-size: 1.5rem; // cỡ chữ 24px
